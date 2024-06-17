@@ -1,33 +1,54 @@
-# Junction Object
+# How to Create Junction Object in Salesforce
 
-### What are Junction Objects?
+### What is a junction object?
 
-In Salesforce, junction objects are created to establish many-to-many relationships between two different objects. For instance, consider "Projects" and "Employees" classes. A project can have multiple employees assigned to it, and an employee can work on multiple projects. To manage this, we use a junction object called "Project Assignment" to link projects and employees. This allows for easy mapping of values and captures the complex association between the two objects.
+A junction object in Salesforce is a custom object that is used to create a many-to-many relationship between two objects. This is achieved by using two master-detail relationships from the junction object to the two related objects.
 
-### How does the Junction object Work?
+### Steps to create Junction object
 
-Junction objects leverage two master-detail relationships to establish connections between records. In our example, the "Project Assignment" object would have master-detail relationships with both the "Projects" and "Employees" objects. This setup allows you to create records in the junction object to represent individual assignments of employees to projects. Each record in the junction object links a specific project with a particular employee, creating a seamless many-to-many relationship.
+#### Step 1: Define the Objects Involved
 
-### Creating a junction object in Salesforce
+Ensure that you have two objects that you want to relate to each other. These can be either standard or custom objects.
 
-1. **Go to Setup**: Log in to Salesforce and navigate to Setup.
-2. **Create Object**: Find "Objects" in the Quick Find box, click "Objects and Fields" > "Objects," then "New Custom Object."
-3. **Define Properties**: Fill in basic info like Label, Name, and Data Type.
-4. **Set Relationships**: Create two Master-Detail relationships with the objects you want to connect.
-5. **Add Fields**: Include any necessary fields for your junction object.
-6. **Save**: Click "Save" to create your junction object.
-7. **Customize Layouts**: Tailor page layouts for ease of use.
-8. **Set Security**: Control who can access and edit fields.
-9. **Test**: Ensure everything works as expected in a sandbox environment.
+#### Step 2: Create the Junction Object
 
-### How to Query Junction Object in Apex?
+1. **Go to Setup**: Click the gear icon in the upper right and select "Setup".
+2. **Navigate to Object Manager**: In the Setup menu, type "Object Manager" in the Quick Find box and select it.
+3. **Create a New Custom Object**:
+   * Click on "Create" and select "Custom Object".
+   * Fill in the label and plural label for the junction object. For example, if you're relating "Projects" and "Employees", you might name it "Project Assignment".
+   * Optionally, set the Record Name, Data Type, and other properties.
+   * Click "Save".
 
-```sql
-List<Junction_Object__c> junctionRecords = [SELECT Id, Name, Related_Object__r.Name FROM Junction_Object__c WHERE Related_Object__c = :relatedObjectId];
-```
+#### Step 3: Create Master-Detail Relationships
 
-This retrieves junction object records based on a related object's ID. Access fields from both the junction object and related objects in the query results. Adjust as needed for your requirements.
+1. **Add the First Master-Detail Relationship**:
+   * In the junction object (e.g., "Project Assignment"), go to the "Fields & Relationships" section.
+   * Click "New" and select "Master-Detail Relationship".
+   * Choose the first related object (e.g., "Projects").
+   * Follow the prompts to complete the setup and save.
+2. **Add the Second Master-Detail Relationship**:
+   * Still, in the junction object, go back to "Fields & Relationships".
+   * Click "New" again and select "Master-Detail Relationship".
+   * Choose the second related object (e.g., "Employees").
+   * Follow the prompts to complete the setup and save.
 
+#### Step 4: Configure Page Layouts and Related Lists
 
+1. **Modify the Page Layouts for the Related Objects**:
+   * In the Object Manager, go to each of the two related objects (e.g., "Projects" and "Employees").
+   * Select "Page Layouts".
+   * Edit the relevant page layout and add the junction object-related list (e.g., "Project Assignments").
+   * Save the changes.
+2. **Modify the Page Layout for the Junction Object**:
+   * In the junction object, go to "Page Layouts".
+   * Edit the layout to ensure it includes relevant fields and related lists.
+   * Save the changes.
+
+#### Step 5: Verify the Setup
+
+1. **Test the Relationships**:
+   * Create records in each of the two related objects (e.g., create a Project and an Employee).
+   * In the related list for the junction object, add a new record and verify that you can relate the two objects through the junction object.
 
 Refer to learn more  [Junction Objects in Salesforce](https://arrify.com/junction-object-in-salesforce/#Creating\_Records\_for\_Junction\_Object)&#x20;
